@@ -5,7 +5,8 @@
 docker pull nginx:{ver}
 
 ## Get nginx source:
-Go to https://nginx.org/download/ and pickup the tar according the {ver} above.
+1. Go to https://nginx.org/download/ and pickup the tar according the {ver} above.
+2. Extract the 'tar' file: ```tar xzf nginx-{ver}.tar```
 
 ## Get the module source code:
 git clone https://github.com/arut/nginx-rtmp-module
