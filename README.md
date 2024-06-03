@@ -40,7 +40,7 @@ For example: ```docker build --no-cache -t nginx:{ver}.rtmp .```
 ## Run the server:
 For example: ```docker run --name nginx-rtmp -d -p 8880:80 -p 4443:443 -p 1935:1935 nginx:{ver}.rtmp```
 
-## Start streaming a video:
+## Test the server, by streaming a video:
 1. Install ffmpeg tool: ```sudo apt install ffmpeg -y```
 2. Send your video as stream: ```ffmpeg -re -i {path/to/video}.mkv -c:v copy -c:a aac -ar 44100 -ac 1 -f flv rtmp://localhost:1935/live/{output-key}``` <br />
 (Description of those flags: [here](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-video-streaming-server-using-nginx-rtmp-on-ubuntu-20-04])
