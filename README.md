@@ -1,5 +1,4 @@
-### Based on ###
-[tiangolo](https://github.com/tiangolo/nginx-rtmp-docker)
+### Based on [tiangolo](https://github.com/tiangolo/nginx-rtmp-docker)
 
 
 # Get nginx image:
@@ -21,24 +20,19 @@ git clone https://github.com/arut/nginx-rtmp-module
 [Example 4](https://github.com/tiangolo/nginx-rtmp-docker/blob/master/nginx.conf)
 
 # Get the original nginx some files:
-docker run --name nginx-tmp --rm -ti nginx:{ver} /bin/bash 
+```docker run --name nginx-tmp --rm -ti nginx:{ver} /bin/bash ```
 
-docker cp nginx-tmp:/etc/nginx/ src/
+```docker cp nginx-tmp:/etc/nginx/ src/```
 
-docker cp nginx-tmp:/usr/lib/nginx/modules src/usr/lib/nginx/
+```docker cp nginx-tmp:/usr/lib/nginx/modules src/usr/lib/nginx/```
 
-docker cp nginx-tmp:/usr/share/nginx/html src/usr/share/nginx/
+```docker cp nginx-tmp:/usr/share/nginx/html src/usr/share/nginx/```
 
-docker cp nginx-tmp:/usr/share/nginx/html src/usr/share/nginx/
-
-
-# Create copy of nginx.conf:
-cp conf.original nginx.conf
+```docker cp nginx-tmp:/usr/share/nginx/html src/usr/share/nginx/```
 
 # Add rtmp section:
 Add the 'rtmp' configuration section to the end of the 'src/etc/nginx/nginx.conf' file.
 
-# See Dockerfile
 
 # Build the image:
 For example: ```docker build --no-cache -t nginx:{ver}.rtmp .```
@@ -53,7 +47,7 @@ For example: ```docker run --name nginx-rtmp -d -p 8880:80 -p 4443:443 -p 1935:1
 3. Check the output: ```docker run -ti nginx-rtmp /bin/bash -c "ls -la /tmp/record | grep {output-key}"```
 4. You can copy your video file back from the container to your host: ```docker cp nginx-rtmp:/tmp/record/{output-key}-{unique-id}.flv {/your/host/path/}```
 
-### -----------------
+### Refs:
 https://github.com/datarhei/nginx-rtmp?tab=readme-ov-file#ffmpeg-example
 
 https://github.com/tiangolo/nginx-rtmp-docker/blob/master/README.md#how-to-test-with-obs-studio-and-vlc
