@@ -19,8 +19,8 @@ git clone https://github.com/arut/nginx-rtmp-module
 
 [Example 4](https://github.com/tiangolo/nginx-rtmp-docker/blob/master/nginx.conf)
 
-## Get the original nginx some files:
-```docker run --name nginx-tmp --rm -ti nginx:{ver} /bin/bash ```
+## Get the original nginx files (config, html, modules, etc.):
+```docker run --name nginx-tmp -d nginx:{ver} ```
 
 ```docker cp nginx-tmp:/etc/nginx/ src/```
 
@@ -28,7 +28,7 @@ git clone https://github.com/arut/nginx-rtmp-module
 
 ```docker cp nginx-tmp:/usr/share/nginx/html src/usr/share/nginx/```
 
-```docker cp nginx-tmp:/usr/share/nginx/html src/usr/share/nginx/```
+And at last: ```docker rm -f nginx-tmp```
 
 ## Add rtmp config section:
 Add the 'rtmp' configuration section to the end of the 'src/etc/nginx/nginx.conf' file.
