@@ -12,24 +12,24 @@ WORKDIR nginx-1.26.0
 ## Build and install Nginx
 ### The default puts everything under /usr/local/nginx, so it's needed to change
 ### it explicitly. Not just for order but to have it in the PATH
-RUN ./configure \
-        --sbin-path=/usr/local/sbin/nginx \
-        --conf-path=/etc/nginx/nginx.conf \
-        --error-log-path=/var/log/nginx/error.log \
-        --pid-path=/var/run/nginx/nginx.pid \
-        --lock-path=/var/lock/nginx/nginx.lock \
-        --http-log-path=/var/log/nginx/access.log \
-        --http-client-body-temp-path=/tmp/nginx-client-body \
-        --with-http_ssl_module \
-        --with-threads \
-        --with-ipv6 \
-        --add-module=/nginx-rtmp-module \
-	--with-debug \
-    && make && make install
+#RUN ./configure \
+#        --sbin-path=/usr/local/sbin/nginx \
+#        --conf-path=/etc/nginx/nginx.conf \
+#        --error-log-path=/var/log/nginx/error.log \
+#        --pid-path=/var/run/nginx/nginx.pid \
+#        --lock-path=/var/lock/nginx/nginx.lock \
+#        --http-log-path=/var/log/nginx/access.log \
+#        --http-client-body-temp-path=/tmp/nginx-client-body \
+#        --with-http_ssl_module \
+#        --with-threads \
+#        --with-ipv6 \
+#        --add-module=/nginx-rtmp-module \
+#	--with-debug \
+#    && make && make install
 
 ## Forward logs to Docker
-RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stderr /var/log/nginx/error.log
+#RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+#    ln -sf /dev/stderr /var/log/nginx/error.log
 
 ## Save original nginx config, modules and default html pages, etc.
 RUN mkdir -p /etc/nginx/conf.d
@@ -47,7 +47,7 @@ RUN chmod -R 700 /tmp/record
 
 ## Remove unnecessary build files
 WORKDIR /
-RUN rm -rf nginx-1.26.0 nginx-rtmp-module
+#RUN rm -rf nginx-1.26.0 nginx-rtmp-module
 
 ## Necessary potrs
 EXPOSE 1935
