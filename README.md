@@ -1,16 +1,16 @@
 ### Based on [tiangolo](https://github.com/tiangolo/nginx-rtmp-docker)
 
 
-# Get nginx image:
+## Get nginx image:
 docker pull nginx:{ver}
 
-# Get nginx source:
+## Get nginx source:
 Go to https://nginx.org/download/ and pickup the tar according the {ver} above.
 
-# Get the module source code:
+## Get the module source code:
 git clone https://github.com/arut/nginx-rtmp-module
 
-# Get config section for rtmp:
+## Get config section for rtmp:
 [Example 1](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-video-streaming-server-using-nginx-rtmp-on-ubuntu-20-04)
 
 [Example 2](https://medium.com/@peer5/setting-up-hls-live-streaming-server-using-nginx-67f6b71758db)
@@ -19,7 +19,7 @@ git clone https://github.com/arut/nginx-rtmp-module
 
 [Example 4](https://github.com/tiangolo/nginx-rtmp-docker/blob/master/nginx.conf)
 
-# Get the original nginx some files:
+## Get the original nginx some files:
 ```docker run --name nginx-tmp --rm -ti nginx:{ver} /bin/bash ```
 
 ```docker cp nginx-tmp:/etc/nginx/ src/```
@@ -30,17 +30,17 @@ git clone https://github.com/arut/nginx-rtmp-module
 
 ```docker cp nginx-tmp:/usr/share/nginx/html src/usr/share/nginx/```
 
-# Add rtmp section:
+## Add rtmp config section:
 Add the 'rtmp' configuration section to the end of the 'src/etc/nginx/nginx.conf' file.
 
 
-# Build the image:
+## Build the image:
 For example: ```docker build --no-cache -t nginx:{ver}.rtmp .```
 
-# Run the server:
+## Run the server:
 For example: ```docker run --name nginx-rtmp -d -p 8880:80 -p 4443:443 -p 1935:1935 nginx:{ver}.rtmp```
 
-# Start streaming a video:
+## Start streaming a video:
 1. Install ffmpeg tool: ```sudo apt install ffmpeg -y```
 2. Send your video as stream: ```ffmpeg -re -i {path/to/video}.mkv -c:v copy -c:a aac -ar 44100 -ac 1 -f flv rtmp://localhost:1935/live/{output-key}``` <br />
 (Description of those flags: [here](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-video-streaming-server-using-nginx-rtmp-on-ubuntu-20-04])
