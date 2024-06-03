@@ -9,9 +9,9 @@ ADD nginx-1.26.0 nginx-1.26.0
 ADD nginx-rtmp-module nginx-rtmp-module
 WORKDIR nginx-1.26.0
 
-# Build and install Nginx
-# The default puts everything under /usr/local/nginx, so it's needed to change
-# it explicitly. Not just for order but to have it in the PATH
+## Build and install Nginx
+### The default puts everything under /usr/local/nginx, so it's needed to change
+### it explicitly. Not just for order but to have it in the PATH
 RUN ./configure \
         --sbin-path=/usr/local/sbin/nginx \
         --conf-path=/etc/nginx/nginx.conf \
@@ -27,32 +27,32 @@ RUN ./configure \
 	--with-debug \
     && make && make install
 
-# Forward logs to Docker
+## Forward logs to Docker
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
 
-# Save original nginx config, modules and default html pages, etc.
+## Save original nginx config, modules and default html pages, etc.
 RUN mkdir -p /etc/nginx/conf.d
 RUN mkdir -p /usr/lib/nginx/modules
 ADD src/usr/lib/nginx/modules /usr/lib/nginx/modules
 ADD src/usr/share/nginx/html /usr/share/nginx/html/
 
-# The directory below is contains the correct nginx.conf, who contains the 'rtmp' config section
+## The directory below is contains the correct nginx.conf, who contains the 'rtmp' config section
 ADD src/etc/nginx /etc/nginx
 
-# Create directory for the records, and give correct permissions
+## Create directory for the records, and give correct permissions
 RUN mkdir /tmp/record
 RUN chown -R nobody:nogroup /tmp/record
 RUN chmod -R 700 /tmp/record
 
-# Remove unnecessary build files
+## Remove unnecessary build files
 WORKDIR /
 RUN rm -rf nginx-1.26.0 nginx-rtmp-module
 
-# Necessary potrs
+## Necessary potrs
 EXPOSE 1935
 EXPOSE 80
 EXPOSE 443
 
-# Start the server
+## Start the server
 CMD ["nginx", "-g", "daemon off;"]
